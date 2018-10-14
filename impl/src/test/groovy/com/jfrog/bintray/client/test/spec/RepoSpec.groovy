@@ -89,8 +89,8 @@ class RepoSpec extends Specification {
         //RepoImpl
         locallyCreated.getType().equals(repo.getType())
         locallyCreated.getName().equals(repo.getName())
-        locallyCreated.getIsPrivate().equals(repo.getIsPrivate())
-        locallyCreated.getPremium().equals(repo.getPremium())
+        locallyCreated.isPrivate().equals(repo.isPrivate())
+        locallyCreated.isPremium().equals(repo.isPremium())
         locallyCreated.getDesc().equals(repo.getDesc())
         locallyCreated.getLabels().sort().equals(repo.getLabels().sort())
 

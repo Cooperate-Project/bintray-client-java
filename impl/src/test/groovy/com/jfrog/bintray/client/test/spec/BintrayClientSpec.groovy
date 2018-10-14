@@ -141,7 +141,7 @@ class BintrayClientSpec extends Specification {
         sleep(5000)
         ver.publish()
         sleep(30000)
-        def response = restClient.get("/" + connectionProperties.username + "/" + REPO_NAME + "/" + files.keySet().asList().get(0), null)
+        def response = anonymousDownloadServerClient.get("/" + connectionProperties.username + "/" + REPO_NAME + "/" + files.keySet().asList().get(0), null)
 
         then:
         response.getStatusLine().getStatusCode() == SC_OK
@@ -165,7 +165,7 @@ class BintrayClientSpec extends Specification {
             System.err.println("error while waiting for publish: " + bce)
         }
         sleep(30000)
-        def response = restClient.get("/" + connectionProperties.username + "/" + REPO_NAME + "/" + files.keySet().asList().get(0), null)
+        def response = anonymousDownloadServerClient.get("/" + connectionProperties.username + "/" + REPO_NAME + "/" + files.keySet().asList().get(0), null)
 
         then:
         response.getStatusLine().getStatusCode() == SC_OK
@@ -260,7 +260,7 @@ class BintrayClientSpec extends Specification {
 
         then:
         pkgJsonContent.equals("{\"name\":\"MyPackage\",\"labels\":[],\"licenses\":[\"MIT\"],\"desc\":\"\",\"website_url\":\"\",\"vcs_url\":\"https://github.com/bintray/bintray-client-java.git\"}")
-        verJsonContent.contentEquals("{\"name\":\"3.3.3\",\"vcs_tag\":\"\"}")
+        verJsonContent.contentEquals("{\"name\":\"3.3.3\",\"vcs_tag\":\"\",\"description\":\"\"}")
 
         cleanup:
         try {
