@@ -6,7 +6,7 @@ buildscript {
     }
 
     dependencies {
-        classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '3.0.3')
+        classpath(group: 'org.jfrog.buildinfo', name: 'build-info-extractor-gradle', version: '4.8.1')
     }
 }
 
@@ -15,7 +15,7 @@ allprojects {
     apply plugin: 'maven-publish'
     apply plugin: 'com.jfrog.artifactory'
 
-    group = 'com.jfrog.bintray.client'
+    group = 'de.cooperate-project'
 
     artifactory {
         contextUrl = 'https://oss.jfrog.org'
@@ -27,19 +27,19 @@ allprojects {
 
         publish {
             repository {
-                repoKey = 'oss-snapshot-local'   //The Artifactory repository key to publish to
+                repoKey = 'maven-central'   //The Artifactory repository key to publish to
                 username = project.hasProperty('bintrayUser') ? project.bintrayUser : getenv()['BINTRAY_USER']
                 password = project.hasProperty('bintrayKey') ? project.bintrayKey : getenv()['BINTRAY_KEY']
             }
             defaults {
                 publications 'main'
-                properties = ['bintray.repo': 'jfrog/bintray-tools', 'bintray.package': 'bintray-client-java', 'bintray.version': version.toString()]
+                properties = ['bintray.repo': 'Cooperate-Project/maven-central', 'bintray.package': 'bintray-client-java', 'bintray.version': version.toString()]
             }
         }
     }
 }
 
-artifactoryPublish.skip = true
+artifactoryPublish.skip = false
 
 subprojects() {
     apply plugin: 'java'
@@ -107,7 +107,7 @@ subprojects() {
                         appendNode('packaging', 'jar')
                         appendNode('name', 'Bintray Java client')
                         appendNode('description', 'Java client for working with Bintray')
-                        appendNode('url', 'https://github.com/bintray/bintray-client-java')
+                        appendNode('url', 'https://github.com/Cooperate-Project/bintray-client-java')
                         appendNode('licenses').with {
                             appendNode('license').with {
                                 appendNode('name', 'The Apache Software License, Version 2.0')
@@ -132,9 +132,9 @@ subprojects() {
                             }
                         }
                         appendNode('scm').with {
-                            appendNode('connection', 'git@github.com:JFrogDev/bintray/bintray-client-java.git')
-                            appendNode('developerConnection', 'git@github.com:bintray/bintray-client-java.git')
-                            appendNode('url', 'https://github.com/bintray/bintray-client-java')
+                            appendNode('connection', 'git@github.com:JFrogDev/Cooperate-Project/bintray-client-java.git')
+                            appendNode('developerConnection', 'git@github.com:Cooperate-Project/bintray-client-java.git')
+                            appendNode('url', 'https://github.com/Cooperate-Project/bintray-client-java')
                         }
                     }
                     asNode().dependencies.'*'.findAll() {
